@@ -43,6 +43,6 @@ if __name__ == "__main__":
     print("Compiling leak monitoring report data...")
     report = generateReport(leaks)
     with open("LeakReport.html", "w+") as f:
-        f.write(report)
+        f.write(str(report))
 
     print("Done.")
