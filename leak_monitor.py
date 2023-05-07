@@ -42,7 +42,15 @@ if __name__ == "__main__":
     # generate report data from failed checks
     print("Compiling leak monitoring report data...")
     report = generateReport(leaks)
+    
+    from jinja2 import Environment, FileSystemLoader
+    environment = Environment(loader=FileSystemLoader("templates/"))
+    template = environment.get_template("leaks.html")
+    content = template.render(count=report["count"], vulns=report["leaks"])
+    with open("LeakReport.html", "w+") as f:
+        f.write(content)
+    """
     with open("LeakReport.html", "w+") as f:
         f.write(str(report))
-
+	"""
     print("Done.")
